@@ -279,6 +279,8 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
             onTouchEnd={onTouchEnd}
         >
             <PanGestureHandler
+                activeOffsetX={[-10, 10]}
+                activeOffsetY={[-20, 20]}
                 {...panGestureHandlerProps}
                 enabled={enabled}
                 onGestureEvent={panGestureEventHandler}
