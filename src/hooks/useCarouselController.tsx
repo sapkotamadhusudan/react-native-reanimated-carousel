@@ -1,117 +1,128 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import type Animated from 'react-native-reanimated';
 import { Easing } from '../constants';
-import { runOnJS, useSharedValue } from 'react-native-reanimated';
+import {
+    runOnJS,
+    useAnimatedReaction,
+    useSharedValue,
+} from 'react-native-reanimated';
 import type {
     TCarouselActionOptions,
     TCarouselProps,
     WithTimingAnimation,
 } from '../types';
 import { dealWithAnimation } from '@/utils/dealWithAnimation';
+import { convertToSharedIndex } from '@/utils/computedWithAutoFillData';
+import { round } from '@/utils/log';
 
 interface IOpts {
     loop: boolean;
     size: number;
+    data: TCarouselProps['data'];
+    autoFillData: TCarouselProps['autoFillData'];
     handlerOffsetX: Animated.SharedValue<number>;
     withAnimation?: TCarouselProps['withAnimation'];
-    disable?: boolean;
     duration?: number;
-    originalLength: number;
-    length: number;
+    defaultIndex?: number;
     onScrollBegin?: () => void;
     onScrollEnd?: () => void;
-    // the length before fill data
-    onChange: (index: number) => void;
 }
 
 export interface ICarouselController {
-    length: number;
-    index: Animated.SharedValue<number>;
-    sharedIndex: React.MutableRefObject<number>;
-    sharedPreIndex: React.MutableRefObject<number>;
+    getSharedIndex: () => number;
     prev: (opts?: TCarouselActionOptions) => void;
     next: (opts?: TCarouselActionOptions) => void;
-    computedIndex: () => void;
     getCurrentIndex: () => number;
-    to: (index: number, animated?: boolean) => void;
     scrollTo: (opts?: TCarouselActionOptions) => void;
 }
 
 export function useCarouselController(options: IOpts): ICarouselController {
     const {
         size,
+        data,
         loop,
         handlerOffsetX,
         withAnimation,
-        disable = false,
-        originalLength,
-        length,
-        onChange,
+        defaultIndex = 0,
         duration,
+        autoFillData,
     } = options;
 
-    const index = useSharedValue<number>(0);
+    const dataInfo = React.useMemo(
+        () => ({
+            length: data.length,
+            disable: !data.length,
+            originalLength: data.length,
+        }),
+        [data]
+    );
+
+    const index = useSharedValue<number>(defaultIndex);
     // The Index displayed to the user
-    const sharedIndex = React.useRef<number>(0);
-    const sharedPreIndex = React.useRef<number>(0);
+    const sharedIndex = useRef<number>(defaultIndex);
+    const sharedPreIndex = useRef<number>(defaultIndex);
 
     const currentFixedPage = React.useCallback(() => {
         if (loop) {
             return -Math.round(handlerOffsetX.value / size);
         }
 
-        const fixed = (handlerOffsetX.value / size) % length;
+        const fixed = (handlerOffsetX.value / size) % dataInfo.length;
         return Math.round(
             handlerOffsetX.value <= 0
                 ? Math.abs(fixed)
-                : Math.abs(fixed > 0 ? length - fixed : 0)
+                : Math.abs(fixed > 0 ? dataInfo.length - fixed : 0)
         );
-    }, [handlerOffsetX, length, size, loop]);
+    }, [handlerOffsetX, dataInfo, size, loop]);
 
-    const convertToSharedIndex = React.useCallback(
-        (i: number) => {
-            if (loop) {
-                switch (originalLength) {
-                    case 1:
-                        return 0;
-                    case 2:
-                        return i % 2;
-                }
-            }
-            return i;
-        },
-        [originalLength, loop]
-    );
+    function setSharedIndex(newSharedIndex: number) {
+        sharedIndex.current = newSharedIndex;
+    }
 
-    const computedIndex = React.useCallback(() => {
-        sharedPreIndex.current = sharedIndex.current;
-        const toInt = (handlerOffsetX.value / size) % length;
-        const i =
-            handlerOffsetX.value <= 0
+    useAnimatedReaction(
+        () => {
+            const handlerOffsetXValue = handlerOffsetX.value;
+            const toInt = round(handlerOffsetXValue / size) % dataInfo.length;
+            const isPositive = handlerOffsetXValue <= 0;
+            const i = isPositive
                 ? Math.abs(toInt)
-                : Math.abs(toInt > 0 ? length - toInt : 0);
-        index.value = i;
-        const _sharedIndex = convertToSharedIndex(i);
-        sharedIndex.current = _sharedIndex;
-        onChange(_sharedIndex);
-    }, [
-        length,
-        handlerOffsetX,
-        sharedPreIndex,
-        index,
-        size,
-        sharedIndex,
-        convertToSharedIndex,
-        onChange,
-    ]);
+                : Math.abs(toInt > 0 ? dataInfo.length - toInt : 0);
+
+            const newSharedIndexValue = convertToSharedIndex({
+                loop,
+                rawDataLength: dataInfo.originalLength,
+                autoFillData: autoFillData!,
+                index: i,
+            });
+
+            return {
+                i,
+                newSharedIndexValue,
+            };
+        },
+        ({ i, newSharedIndexValue }) => {
+            index.value = i;
+            runOnJS(setSharedIndex)(newSharedIndexValue);
+        },
+        [
+            sharedPreIndex,
+            sharedIndex,
+            size,
+            dataInfo,
+            index,
+            loop,
+            autoFillData,
+            handlerOffsetX,
+        ]
+    );
 
     const getCurrentIndex = React.useCallback(() => {
         return index.value;
     }, [index]);
 
     const canSliding = React.useCallback(() => {
-        return !disable;
-    }, [disable]);
+        return !dataInfo.disable;
+    }, [dataInfo]);
 
     const onScrollEnd = React.useCallback(() => {
         options.onScrollEnd?.();
@@ -149,7 +160,8 @@ export function useCarouselController(options: IOpts): ICarouselController {
         (opts: TCarouselActionOptions = {}) => {
             'worklet';
             const { count = 1, animated = true, onFinished } = opts;
-            if (!canSliding() || (!loop && index.value >= length - 1)) return;
+            if (!canSliding() || (!loop && index.value >= dataInfo.length - 1))
+                return;
 
             onScrollBegin?.();
 
@@ -170,7 +182,7 @@ export function useCarouselController(options: IOpts): ICarouselController {
             canSliding,
             loop,
             index,
-            length,
+            dataInfo,
             onScrollBegin,
             handlerOffsetX,
             size,
@@ -212,21 +224,22 @@ export function useCarouselController(options: IOpts): ICarouselController {
     );
 
     const to = React.useCallback(
-        (idx: number, animated: boolean = false) => {
-            if (idx === index.value) return;
+        (opts: { i: number; animated: boolean; onFinished?: () => void }) => {
+            const { i, animated = false, onFinished } = opts;
+            if (i === index.value) return;
             if (!canSliding()) return;
 
             onScrollBegin?.();
 
-            const offset = handlerOffsetX.value + (index.value - idx) * size;
+            const offset = handlerOffsetX.value + (index.value - i) * size;
 
             if (animated) {
-                index.value = idx;
-                handlerOffsetX.value = scrollWithTiming(offset);
+                index.value = i;
+                handlerOffsetX.value = scrollWithTiming(offset, onFinished);
             } else {
                 handlerOffsetX.value = offset;
-                index.value = idx;
-                runOnJS(onScrollEnd)();
+                index.value = i;
+                onFinished?.();
             }
         },
         [
@@ -236,36 +249,38 @@ export function useCarouselController(options: IOpts): ICarouselController {
             handlerOffsetX,
             size,
             scrollWithTiming,
-            onScrollEnd,
         ]
     );
 
     const scrollTo = React.useCallback(
         (opts: TCarouselActionOptions = {}) => {
-            const { count, animated = false, onFinished } = opts;
+            const { index: i, count, animated = false, onFinished } = opts;
+
+            if (typeof i === 'number' && i > -1) {
+                to({ i, animated, onFinished });
+                return;
+            }
+
             if (!count) {
                 return;
             }
+
             const n = Math.round(count);
+
             if (n < 0) {
                 prev({ count: Math.abs(n), animated, onFinished });
             } else {
                 next({ count: n, animated, onFinished });
             }
         },
-        [prev, next]
+        [prev, next, to]
     );
 
     return {
         next,
         prev,
-        to,
         scrollTo,
-        index,
-        length,
-        sharedIndex,
-        sharedPreIndex,
-        computedIndex,
         getCurrentIndex,
+        getSharedIndex: () => sharedIndex.current,
     };
 }

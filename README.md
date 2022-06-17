@@ -17,64 +17,31 @@ English | [简体中文](./README.zh-CN.md)
 -   **It completely solves this** [[problem]](https://github.com/meliorence/react-native-snap-carousel/issues/632) **for `react-native-snap-carousel`!**
 -   **Simple**、**Infinitely scrolling very smooth**、**Fully implemented using Reanimated 2!**
 
-> V2 has been released! Join it! [[v1 docs]](https://github.com/dohooo/react-native-reanimated-carousel/tree/v1.x.x) 
+> V2 has been released! Join it! [[v1 docs]](https://github.com/dohooo/react-native-reanimated-carousel/tree/v1.x.x)
 
 > Support to Web [[demo]](https://dohooo.github.io/react-native-reanimated-carousel/)
 
 > Click on the image to see the code snippets. [[Try it]](https://snack.expo.dev/@zhaodonghao586/simple-carousel) 🍺
 
-<p align="center">
-  <a href="./example/src/normal/index.tsx">
-    <img src="assets/normal-horizontal.gif" width="300"/>  
-  </a>
-  <a href="./example/src/normal/index.tsx">
-    <img src="assets/normal-vertical.gif" width="300"/>  
-  </a>
-  <a href="./example/src/parallax/index.tsx">
-    <img src="assets/parallax-horizontal.gif" width="300"/>  
-  </a>
-  <a href="./example/src/parallax/index.tsx">
-    <img src="assets/parallax-vertical.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-horizontal-left.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-horizontal-right.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-vertical-left.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-vertical-right.gif" width="300"/>  
-  </a>
-</p>
+|              <img src="assets/normal-horizontal.gif"/>               |                <img src="assets/normal-vertical.gif"/>                |              <img src="assets/parallax-horizontal.gif"/>               |
+| :------------------------------------------------------------------: | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|  <a href="./exampleExpo/src/normal/index.tsx">normal-horizontal</a>  |   <a href="./exampleExpo/src/normal/index.tsx">normal-vertical</a>    | <a href="./exampleExpo/src/parallax/index.tsx">parallax-horizontal</a> |
+|              <img src="assets/parallax-vertical.gif"/>               |             <img src="assets/stack-horizontal-left.gif"/>             |             <img src="assets/stack-horizontal-right.gif"/>             |
+| <a href="./exampleExpo/src/parallax/index.tsx">parallax-vertical</a> | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-left</a> | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-right</a> |
+|             <img src="assets/stack-vertical-left.gif"/>              |             <img src="assets/stack-vertical-right.gif"/>              |             <img src="assets/stack-horizontal-right.gif"/>             |
+| <a href="./exampleExpo/src/stack/index.tsx">stack-vertical-left</a>  | <a href="./exampleExpo/src/stack/index.tsx">stack-vertical-right</a>  | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-right</a> |
 
 > Now you can make cool animations with us! Very easy! [[Details]](./docs/custom-animation.md)
 
-<p align="center">
-  <a href="./example/src/advanced-parallax/index.tsx">
-    <img src="assets/advanced-parallax.gif" width="300"/>  
-  </a>
-  <a href="./example/src/pause-advanced-parallax/index.tsx">
-    <img src="assets/pause-advanced-parallax.gif" width="300"/>  
-  </a>
-  <a href="./example/src/scale-fade-in-out/index.tsx">
-    <img src="assets/scale-fade-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/rotate-scale-fade-in-out/index.tsx">
-    <img src="assets/rotate-scale-fade-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/rotate-in-out/index.tsx">
-    <img src="assets/rotate-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/anim-tab-bar/index.tsx">
-    <img src="assets/anim-tab-bar.gif" width="300"/>  
-  </a>
-  <a href="./example/src/marquee/index.tsx">
-    <img src="assets/marquee.gif" width="300"/>  
-  </a>
-</p>
+|                          <img src="assets/advanced-parallax.gif"/>                          |                      <img src="assets/pause-advanced-parallax.gif"/>                      |                   <img src="assets/scale-fade-in-out.gif"/>                   |
+| :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
+|        <a href="./exampleExpo/src/advanced-parallax/index.tsx">advanced-parallax</a>        | <a href="./exampleExpo/src/pause-advanced-parallax/index.tsx">pause-advanced-parallax</a> | <a href="./exampleExpo/src/scale-fade-in-out/index.tsx">scale-fade-in-out</a> |
+|                      <img src="assets/rotate-scale-fade-in-out.gif"/>                       |                           <img src="assets/rotate-in-out.gif"/>                           |                     <img src="assets/anim-tab-bar.gif"/>                      |
+| <a href="./exampleExpo/src/rotate-scale-fade-in-out/index.tsx">rotate-scale-fade-in-out</a> |           <a href="./exampleExpo/src/rotate-in-out/index.tsx">rotate-in-out</a>           |      <a href="./exampleExpo/src/anim-tab-bar/index.tsx">anim-tab-bar</a>      |
+|                               <img src="assets/marquee.gif"/>                               |                             <img src="assets/multiple.gif"/>                              |                       <img src="assets/circular.gif"/>                        |
+|                  <a href="./exampleExpo/src/marquee/index.tsx">marquee</a>                  |                <a href="./exampleExpo/src/multiple/index.tsx">multiple</a>                |          <a href="./exampleExpo/src/circular/index.tsx">circular</a>          |
+|                           <img src="assets/parallax-layers.gif"/>                           |                               <img src="assets/flow.gif"/>                                |                         <img src="assets/fold.gif"/>                          |
+|          <a href="./exampleExpo/src/parallax-layers/index.tsx">parallax-layers</a>          |                    <a href="./exampleExpo/src/flow/index.tsx">flow</a>                    |              <a href="./exampleExpo/src/fold/index.tsx">fold</a>              |
 
 ## Table of contents
 
@@ -101,6 +68,11 @@ npm install react-native-reanimated-carousel
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated(>=2.0.0)`](https://github.com/kmagiera/react-native-reanimated).
 
+|                                        | react-native-reanimated | react-native-gesture-handler |
+| -------------------------------------- | ----------------------- | ---------------------------- |
+| react-native-reanimated-carousel < v3  | <2.7.0                  | \*                           |
+| react-native-reanimated-carousel >= v3 | >=2.7.0                 | \*                           |
+
 ## Usage
 
 ```tsx
@@ -119,7 +91,7 @@ import Carousel from 'react-native-reanimated-carousel';
 -   Optimizing
 
     -   When rendering a large number of elements, you can use the 'windowSize' property to control how many items of the current element are rendered. The default is full rendering. After testing without this property, frames will drop when rendering 200 empty views. After setting this property, rendering 1000 empty views is still smooth. (The specific number depends on the phone model tested)
-  
+
 -   Used in `ScrollView/FlastList`
 
     -   **[#143](https://github.com/dohooo/react-native-reanimated-carousel/issues/143) - Carousel suppresses ScrollView/FlastList scroll gesture handler:** When using a carousel with a layout oriented to only one direction (vertical/horizontal) and inside a ScrollView/FlatList, it is important for the user experience that the unused axis does not impede the scroll of the list. So that, for example, the x-axis is free we can change the [activeOffsetX](https://docs.swmansion.com/react-native-gesture-handler/docs/1.10.3/api/gesture-handlers/pan-gh/#activeoffsetx) of the gesture handler:
@@ -158,7 +130,9 @@ import Carousel from 'react-native-reanimated-carousel';
 </details>
 
 ## Example
+
 > `:pretty` use pretty images
+
 ```shell
 yarn ios
 yarn ios:pretty
@@ -173,9 +147,7 @@ yarn web:pretty
 ## Sponsors
 
 <p align="center">
-  <a href="./sponsorkit/sponsors.svg">
-    <img src='./sponsorkit/sponsors.svg'/>
-  </a>
+  <img src='https://github.com/dohooo/sponsors/blob/master/sponsors.png?raw=true'/>
 </p>
 
 ## License

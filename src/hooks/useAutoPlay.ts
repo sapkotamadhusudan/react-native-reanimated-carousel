@@ -14,6 +14,7 @@ export function useAutoPlay(opts: {
         carouselController,
     } = opts;
 
+    const { prev, next } = carouselController;
     const timer = React.useRef<NodeJS.Timer>();
     const stopped = React.useRef<boolean>(!autoPlay);
 
@@ -22,18 +23,19 @@ export function useAutoPlay(opts: {
             return;
         }
 
+        timer.current && clearTimeout(timer.current);
         timer.current = setTimeout(() => {
             autoPlayReverse
-                ? carouselController.prev({ onFinished: play })
-                : carouselController.next({ onFinished: play });
+                ? prev({ onFinished: play })
+                : next({ onFinished: play });
         }, autoPlayInterval);
-    }, [autoPlayReverse, autoPlayInterval, carouselController]);
+    }, [autoPlayReverse, autoPlayInterval, prev, next]);
 
     const pause = React.useCallback(() => {
         if (!autoPlay) {
             return;
         }
-        timer.current && clearInterval(timer.current);
+        timer.current && clearTimeout(timer.current);
         stopped.current = true;
     }, [autoPlay]);
 

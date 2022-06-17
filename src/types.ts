@@ -1,4 +1,4 @@
-import type { ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import type { PanGestureHandlerProps } from 'react-native-gesture-handler';
 import type {
     AnimatedStyleProp,
@@ -70,6 +70,14 @@ export type TCarouselProps<T = any> = {
      */
     data: T[];
     /**
+     * Auto fill data array to allow loop playback when the loop props is true.
+     * @default true
+     * @example
+     * [1] => [1, 1, 1]
+     * [1, 2] => [1, 2, 1, 2]
+     */
+    autoFillData?: boolean;
+    /**
      * Default index
      * @default 0
      */
@@ -96,7 +104,7 @@ export type TCarouselProps<T = any> = {
     /**
      * Carousel container style
      */
-    style?: ViewStyle;
+    style?: StyleProp<ViewStyle>;
     /**
      * PanGestureHandler props
      */
@@ -137,6 +145,10 @@ export type TCarouselProps<T = any> = {
      */
     withAnimation?: WithAnimation;
     /**
+     * Used to locate this view in end-to-end tests.
+     */
+    testID?: string;
+    /**
      * Custom carousel config.
      */
     customConfig?: () => CustomConfig;
@@ -160,7 +172,7 @@ export type TCarouselProps<T = any> = {
     /**
      * On scroll end
      */
-    onScrollEnd?: (previous: number, current: number) => void;
+    onScrollEnd?: (index: number) => void;
     /**
      * On progress change
      * @param offsetProgress Total of offset distance (0 390 780 ...)
@@ -177,21 +189,16 @@ export interface ICarouselInstance {
      * Scroll to previous item, it takes one optional argument (count),
      * which allows you to specify how many items to cross
      */
-    prev: (opts?: TCarouselActionOptions) => void;
+    prev: (opts?: Omit<TCarouselActionOptions, 'index'>) => void;
     /**
      * Scroll to next item, it takes one optional argument (count),
      * which allows you to specify how many items to cross
      */
-    next: (opts?: TCarouselActionOptions) => void;
+    next: (opts?: Omit<TCarouselActionOptions, 'index'>) => void;
     /**
      * Get current item index
      */
     getCurrentIndex: () => number;
-    /**
-     * Go to index
-     * @deprecated use scrollTo instead
-     */
-    goToIndex: (index: number, animated?: boolean) => void;
     /**
      * Use value to scroll to a position where relative to the current position,
      * scrollTo(-2) is equivalent to prev(2), scrollTo(2) is equivalent to next(2)
@@ -210,6 +217,7 @@ export type CarouselRenderItem<ItemT> = (
 ) => React.ReactElement;
 
 export interface TCarouselActionOptions {
+    index?: number;
     count?: number;
     animated?: boolean;
     onFinished?: () => void;

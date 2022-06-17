@@ -2,9 +2,6 @@
 #
 .DS_Store
 
-# XDE
-.expo/
-
 # VSCode
 .vscode/
 jsconfig.json
@@ -38,7 +35,7 @@ android.iml
 
 # Cocoapods
 #
-example/ios/Pods
+exampleBare/ios/Pods
 
 # node.js
 #

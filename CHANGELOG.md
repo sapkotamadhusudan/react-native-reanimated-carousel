@@ -1,3 +1,120 @@
+# [3.0.0](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.6.0...v3.0.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* update reanimated version for fix "undefined is not a function" ([a326f8c](https://github.com/dohooo/react-native-reanimated-carousel/commit/a326f8c58e3572b9a8fcaf8885c2b43208420af2)), closes [#159](https://github.com/dohooo/react-native-reanimated-carousel/issues/159)
+
+# [2.6.0](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.5.1...v2.6.0) (2022-06-04)
+
+
+### Bug Fixes
+
+* global.__reanimatedWorkletInit is not a function ([591f0d8](https://github.com/dohooo/react-native-reanimated-carousel/commit/591f0d89744d4f7b97784139c86fa1ef85a70606)), closes [#159](https://github.com/dohooo/react-native-reanimated-carousel/issues/159) [#182](https://github.com/dohooo/react-native-reanimated-carousel/issues/182)
+
+## [2.5.1](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.5.0...v2.5.1) (2022-06-01)
+
+# [2.5.0](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.4.0...v2.5.0) (2022-05-29)
+
+
+### Bug Fixes
+
+* modify styles prop types ([c32a98c](https://github.com/dohooo/react-native-reanimated-carousel/commit/c32a98cb5667b3b97601186726869e73efcb924e)), closes [#195](https://github.com/dohooo/react-native-reanimated-carousel/issues/195)
+
+
+### Features
+
+* add index argument, can jump to specific position. And remove goToIndex prop in ref ([138e606](https://github.com/dohooo/react-native-reanimated-carousel/commit/138e606dccf8c94c2de800076695f38654ab911e)), closes [#196](https://github.com/dohooo/react-native-reanimated-carousel/issues/196)
+* always return the real index ([03216a5](https://github.com/dohooo/react-native-reanimated-carousel/commit/03216a5761bd04a9220233f1bfbdd6dcb6549b7f)), closes [#192](https://github.com/dohooo/react-native-reanimated-carousel/issues/192)
+
+# [2.4.0](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.11...v2.4.0) (2022-05-18)
+
+
+### Bug Fixes
+
+* index bug ([57a18ad](https://github.com/dohooo/react-native-reanimated-carousel/commit/57a18ad8f3382b737030b29a5bbc449fbcf08cb7)), closes [#185](https://github.com/dohooo/react-native-reanimated-carousel/issues/185)
+
+## [2.3.11](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.10...v2.3.11) (2022-05-15)
+
+
+### Bug Fixes
+
+* focused index is not persisted when carousel component is re-rendered ([d82d39b](https://github.com/dohooo/react-native-reanimated-carousel/commit/d82d39bfa1abd9060bad6756b0feccd894d22cbe)), closes [#181](https://github.com/dohooo/react-native-reanimated-carousel/issues/181)
+
+## [2.3.10](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.9...v2.3.10) (2022-05-04)
+
+
+### Bug Fixes
+
+* getCurrentIndex always return last snap index even after multiple data changes ([9b03a4d](https://github.com/dohooo/react-native-reanimated-carousel/commit/9b03a4d7f53bf22c0ee78dc91ec74f42b865357b)), closes [#178](https://github.com/dohooo/react-native-reanimated-carousel/issues/178)
+
+
+### Features
+
+* add testID props for e2e test ([a66eecb](https://github.com/dohooo/react-native-reanimated-carousel/commit/a66eecbe1603edb577ced79c63941d4d25c60ecc)), closes [#177](https://github.com/dohooo/react-native-reanimated-carousel/issues/177)
+
+## [2.3.9](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.8...v2.3.9) (2022-05-03)
+
+
+### Bug Fixes
+
+* update typescript config ([8fa86a2](https://github.com/dohooo/react-native-reanimated-carousel/commit/8fa86a269afccdde77a9a2abe7ea75d658f22c9c))
+
+## [2.3.8](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.7...v2.3.8) (2022-05-02)
+
+
+### Bug Fixes
+
+* fixed styles bug ([918bf45](https://github.com/dohooo/react-native-reanimated-carousel/commit/918bf45f1315d75017e96b32ab48830e13965224))
+
+## [2.3.7](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.6...v2.3.7) (2022-05-02)
+
+
+### Bug Fixes
+
+* fix styles prop bug ([439ac4d](https://github.com/dohooo/react-native-reanimated-carousel/commit/439ac4d622f720cba287aa264573517218a365d6))
+
+## [2.3.6](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.5...v2.3.6) (2022-05-02)
+
+
+### Bug Fixes
+
+* current index doesn't reset when modify data length ([99f44bc](https://github.com/dohooo/react-native-reanimated-carousel/commit/99f44bc995cf45970b151528aa9478cc03e1ceef)), closes [#163](https://github.com/dohooo/react-native-reanimated-carousel/issues/163)
+* duplicate style ([7e7e00f](https://github.com/dohooo/react-native-reanimated-carousel/commit/7e7e00f4ee18bf92749f9e2224d4e0c7e98647ba)), closes [#169](https://github.com/dohooo/react-native-reanimated-carousel/issues/169)
+* refactoring logic of withAutoFillData, Add onProgressChange value boundary ([101456a](https://github.com/dohooo/react-native-reanimated-carousel/commit/101456a4e7a3f4719db844b302bd6d5f912206cb)), closes [#158](https://github.com/dohooo/react-native-reanimated-carousel/issues/158)
+
+
+### Features
+
+* add autoFillData props, It controls whether the data is automatically populated ([309688c](https://github.com/dohooo/react-native-reanimated-carousel/commit/309688cb6c862f059e3915df9dce1c3f62e8e146)), closes [#170](https://github.com/dohooo/react-native-reanimated-carousel/issues/170)
+
+## [2.3.5](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.4...v2.3.5) (2022-04-27)
+
+## [2.3.4](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.3...v2.3.4) (2022-04-10)
+
+
+### Bug Fixes
+
+* "defaultIndex" wasn't define internal values (UI bridge and refs) ([7f7a659](https://github.com/dohooo/react-native-reanimated-carousel/commit/7f7a659a6e9863ecbdc7241d990c0e67c16313d0))
+
+## [2.3.3](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.3-beta.1...v2.3.3) (2022-04-03)
+
+## [2.3.3-beta.1](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.3-beta.0...v2.3.3-beta.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* add *length and remove *data from deps ([fbfd372](https://github.com/dohooo/react-native-reanimated-carousel/commit/fbfd37293cd5931f8843ee3346debfffdf3c404d))
+* https://github.com/dohooo/react-native-reanimated-carousel/issues/66 ([54e74d2](https://github.com/dohooo/react-native-reanimated-carousel/commit/54e74d20d7f6e6f73e8ba45f223578bc9b8bd9b3))
+* update example dependence ([ac2c504](https://github.com/dohooo/react-native-reanimated-carousel/commit/ac2c504b09ee109bad8a8602b844800341e2881b))
+
+
+### Features
+
+* add flow animation ([d5d39a8](https://github.com/dohooo/react-native-reanimated-carousel/commit/d5d39a80cecbd9c5436b1c1c5f4faf8082ba976a))
+
+## [2.3.3-beta.0](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.2...v2.3.3-beta.0) (2022-03-30)
+
 ## [2.3.2](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.2-beta.1...v2.3.2) (2022-03-03)
 
 ## [2.3.2-beta.1](https://github.com/dohooo/react-native-reanimated-carousel/compare/v2.3.2-beta.0...v2.3.2-beta.1) (2022-03-03)

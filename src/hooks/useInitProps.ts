@@ -1,5 +1,5 @@
+import { computedFillDataWithAutoFillData } from '@/utils/computedWithAutoFillData';
 import React from 'react';
-import { DATA_LENGTH } from '../constants';
 import type { TCarouselProps } from '../types';
 
 type TGetRequiredProps<P extends keyof TCarouselProps> = Record<
@@ -15,6 +15,7 @@ export type TInitializeCarouselProps<T> = TCarouselProps<T> &
         | 'height'
         | 'scrollAnimationDuration'
         | 'autoPlayInterval'
+        | 'autoFillData'
     > & {
         // Raw data that has not been processed
         rawData: T[];
@@ -33,6 +34,7 @@ export function useInitProps<T>(
         style = {},
         panGestureHandlerProps = {},
         pagingEnabled = true,
+        autoFillData = true,
         snapEnabled = props.enableSnap ?? true,
         width: _width,
         height: _height,
@@ -42,19 +44,16 @@ export function useInitProps<T>(
     const height = Math.round(_height || 0);
     const autoPlayInterval = Math.max(_autoPlayInterval, 0);
 
-    const data = React.useMemo<T[]>(() => {
-        if (!loop) return rawData;
-
-        if (rawData.length === DATA_LENGTH.SINGLE_ITEM) {
-            return [rawData[0], rawData[0], rawData[0]];
-        }
-
-        if (rawData.length === DATA_LENGTH.DOUBLE_ITEM) {
-            return [rawData[0], rawData[1], rawData[0], rawData[1]];
-        }
-
-        return rawData;
-    }, [rawData, loop]);
+    const data = React.useMemo<T[]>(
+        () =>
+            computedFillDataWithAutoFillData<T>({
+                loop,
+                autoFillData,
+                data: rawData,
+                dataLength: rawData.length,
+            }),
+        [rawData, loop, autoFillData]
+    );
 
     if (props.mode === 'vertical-stack' || props.mode === 'horizontal-stack') {
         if (!props.modeConfig) {
@@ -66,6 +65,7 @@ export function useInitProps<T>(
     return {
         ...props,
         defaultIndex,
+        autoFillData,
         data,
         rawData,
         loop,

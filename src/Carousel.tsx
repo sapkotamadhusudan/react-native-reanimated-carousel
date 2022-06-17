@@ -9,22 +9,24 @@ import { useVisibleRanges } from './hooks/useVisibleRanges';
 
 import type { ICarouselInstance, TCarouselProps } from './types';
 import { StyleSheet, View } from 'react-native';
-import { DATA_LENGTH } from './constants';
 import { BaseLayout } from './layouts/BaseLayout';
 import { useLayoutConfig } from './hooks/useLayoutConfig';
 import { useInitProps } from './hooks/useInitProps';
 import { CTX } from './store';
 import { useCommonVariables } from './hooks/useCommonVariables';
 import { useOnProgressChange } from './hooks/useOnProgressChange';
+import { computedRealIndexWithAutoFillData } from './utils/computedWithAutoFillData';
 
 const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
     (_props, ref) => {
         const props = useInitProps(_props);
 
         const {
+            testID,
             data,
             rawData,
             loop,
+            autoFillData,
             mode,
             style,
             width,
@@ -42,48 +44,50 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
             onScrollBegin,
             onProgressChange,
             customAnimation,
+            defaultIndex,
         } = props;
 
         const commonVariables = useCommonVariables(props);
         const { size, handlerOffsetX } = commonVariables;
+        const dataLength = data.length;
 
         const offsetX = useDerivedValue(() => {
-            const totalSize = size * data.length;
+            const totalSize = size * dataLength;
             const x = handlerOffsetX.value % totalSize;
 
             if (!loop) {
                 return handlerOffsetX.value;
             }
             return isNaN(x) ? 0 : x;
-        }, [loop, size, data]);
+        }, [loop, size, dataLength]);
 
         usePropsErrorBoundary(props);
-        useOnProgressChange({ size, offsetX, rawData, onProgressChange });
+        useOnProgressChange({
+            autoFillData,
+            loop,
+            size,
+            offsetX,
+            rawData,
+            onProgressChange,
+        });
 
         const carouselController = useCarouselController({
             loop,
             size,
+            data,
+            autoFillData,
             handlerOffsetX,
-            length: data.length,
-            disable: !data.length,
             withAnimation,
-            originalLength: data.length,
+            defaultIndex,
             onScrollEnd: () => runOnJS(_onScrollEnd)(),
             onScrollBegin: () => !!onScrollBegin && runOnJS(onScrollBegin)(),
-            onChange: (i) => !!onSnapToItem && runOnJS(onSnapToItem)(i),
             duration: scrollAnimationDuration,
         });
 
-        const {
-            next,
-            prev,
-            sharedPreIndex,
-            sharedIndex,
-            computedIndex,
-            getCurrentIndex,
-        } = carouselController;
+        const { next, prev, scrollTo, getSharedIndex, getCurrentIndex } =
+            carouselController;
 
-        const { start, pause } = useAutoPlay({
+        const { start: startAutoPlay, pause: pauseAutoPlay } = useAutoPlay({
             autoPlay,
             autoPlayInterval,
             autoPlayReverse,
@@ -91,30 +95,47 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
         });
 
         const _onScrollEnd = React.useCallback(() => {
-            computedIndex();
-            onScrollEnd?.(sharedPreIndex.current, sharedIndex.current);
-        }, [sharedPreIndex, sharedIndex, computedIndex, onScrollEnd]);
+            const _sharedIndex = Math.round(getSharedIndex());
+
+            const realIndex = computedRealIndexWithAutoFillData({
+                index: _sharedIndex,
+                dataLength: rawData.length,
+                loop,
+                autoFillData,
+            });
+
+            if (onSnapToItem) {
+                onSnapToItem(realIndex);
+            }
+            if (onScrollEnd) {
+                onScrollEnd(realIndex);
+            }
+        }, [
+            loop,
+            autoFillData,
+            rawData.length,
+            getSharedIndex,
+            onSnapToItem,
+            onScrollEnd,
+        ]);
 
         const scrollViewGestureOnScrollBegin = React.useCallback(() => {
-            pause();
+            pauseAutoPlay();
             onScrollBegin?.();
-        }, [onScrollBegin, pause]);
+        }, [onScrollBegin, pauseAutoPlay]);
 
         const scrollViewGestureOnScrollEnd = React.useCallback(() => {
-            start();
+            startAutoPlay();
             _onScrollEnd();
-        }, [_onScrollEnd, start]);
+        }, [_onScrollEnd, startAutoPlay]);
 
-        const scrollViewGestureOnTouchBegin = React.useCallback(pause, [pause]);
+        const scrollViewGestureOnTouchBegin = React.useCallback(pauseAutoPlay, [
+            pauseAutoPlay,
+        ]);
 
-        const scrollViewGestureOnTouchEnd = React.useCallback(start, [start]);
-
-        const goToIndex = React.useCallback(
-            (i: number, animated?: boolean) => {
-                carouselController.to(i, animated);
-            },
-            [carouselController]
-        );
+        const scrollViewGestureOnTouchEnd = React.useCallback(startAutoPlay, [
+            startAutoPlay,
+        ]);
 
         React.useImperativeHandle(
             ref,
@@ -122,16 +143,9 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
                 next,
                 prev,
                 getCurrentIndex,
-                goToIndex,
-                scrollTo: carouselController.scrollTo,
+                scrollTo,
             }),
-            [
-                getCurrentIndex,
-                goToIndex,
-                next,
-                prev,
-                carouselController.scrollTo,
-            ]
+            [getCurrentIndex, next, prev, scrollTo]
         );
 
         const visibleRanges = useVisibleRanges({
@@ -145,14 +159,12 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
 
         const renderLayout = React.useCallback(
             (item: any, i: number) => {
-                let realIndex = i;
-                if (rawData.length === DATA_LENGTH.SINGLE_ITEM) {
-                    realIndex = i % 1;
-                }
-
-                if (rawData.length === DATA_LENGTH.DOUBLE_ITEM) {
-                    realIndex = i % 2;
-                }
+                const realIndex = computedRealIndexWithAutoFillData({
+                    index: i,
+                    dataLength: rawData.length,
+                    loop,
+                    autoFillData,
+                });
 
                 return (
                     <BaseLayout
@@ -173,9 +185,11 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
                 );
             },
             [
+                loop,
                 rawData,
                 offsetX,
                 visibleRanges,
+                autoFillData,
                 renderItem,
                 layoutConfig,
                 customAnimation,
@@ -190,6 +204,7 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
                         { width: width || '100%', height: height || '100%' },
                         style,
                     ]}
+                    testID={testID}
                 >
                     <ScrollViewGesture
                         size={size}

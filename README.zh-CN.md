@@ -19,62 +19,29 @@
 
 > v2 已经发布，希望大家喜欢!~ [[v1 文档]](https://github.com/dohooo/react-native-reanimated-carousel/tree/v1.x.x)
 
-> 支持Web端 [[示例]](https://dohooo.github.io/react-native-reanimated-carousel/)
+> 支持 Web 端 [[示例]](https://dohooo.github.io/react-native-reanimated-carousel/)
 
 > 点击图片，查看代码 [[试一下]](https://snack.expo.dev/@zhaodonghao586/simple-carousel) 🍺
 
-<p align="center">
-  <a href="./example/src/normal/index.tsx">
-    <img src="assets/normal-horizontal.gif" width="300"/>  
-  </a>
-  <a href="./example/src/normal/index.tsx">
-    <img src="assets/normal-vertical.gif" width="300"/>  
-  </a>
-  <a href="./example/src/parallax/index.tsx">
-    <img src="assets/parallax-horizontal.gif" width="300"/>  
-  </a>
-  <a href="./example/src/parallax/index.tsx">
-    <img src="assets/parallax-vertical.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-horizontal-left.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-horizontal-right.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-vertical-left.gif" width="300"/>  
-  </a>
-  <a href="./example/src/stack/index.tsx">
-    <img src="assets/stack-vertical-right.gif" width="300"/>  
-  </a>
-</p>
+|              <img src="assets/normal-horizontal.gif"/>               |                <img src="assets/normal-vertical.gif"/>                |              <img src="assets/parallax-horizontal.gif"/>               |
+| :------------------------------------------------------------------: | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|  <a href="./exampleExpo/src/normal/index.tsx">normal-horizontal</a>  |   <a href="./exampleExpo/src/normal/index.tsx">normal-vertical</a>    | <a href="./exampleExpo/src/parallax/index.tsx">parallax-horizontal</a> |
+|              <img src="assets/parallax-vertical.gif"/>               |             <img src="assets/stack-horizontal-left.gif"/>             |             <img src="assets/stack-horizontal-right.gif"/>             |
+| <a href="./exampleExpo/src/parallax/index.tsx">parallax-vertical</a> | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-left</a> | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-right</a> |
+|             <img src="assets/stack-vertical-left.gif"/>              |             <img src="assets/stack-vertical-right.gif"/>              |             <img src="assets/stack-horizontal-right.gif"/>             |
+| <a href="./exampleExpo/src/stack/index.tsx">stack-vertical-left</a>  | <a href="./exampleExpo/src/stack/index.tsx">stack-vertical-right</a>  | <a href="./exampleExpo/src/stack/index.tsx">stack-horizontal-right</a> |
 
 > 现在你可以和我们一起来制作酷炫的动画了！ 非常简单! [[详情]](./docs/custom-animation.zh-CN.md)
 
-<p align="center">
-  <a href="./example/src/advanced-parallax/index.tsx">
-    <img src="assets/advanced-parallax.gif" width="300"/>  
-  </a>
-  <a href="./example/src/pause-advanced-parallax/index.tsx">
-    <img src="assets/pause-advanced-parallax.gif" width="300"/>  
-  </a>
-  <a href="./example/src/scale-fade-in-out/index.tsx">
-    <img src="assets/scale-fade-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/rotate-scale-fade-in-out/index.tsx">
-    <img src="assets/rotate-scale-fade-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/rotate-in-out/index.tsx">
-    <img src="assets/rotate-in-out.gif" width="300"/>  
-  </a>
-  <a href="./example/src/anim-tab-bar/index.tsx">
-    <img src="assets/anim-tab-bar.gif" width="300"/>  
-  </a>
-  <a href="./example/src/marquee/index.tsx">
-    <img src="assets/marquee.gif" width="300"/>  
-  </a>
-</p>
+|                          <img src="assets/advanced-parallax.gif"/>                          |                      <img src="assets/pause-advanced-parallax.gif"/>                      |                   <img src="assets/scale-fade-in-out.gif"/>                   |
+| :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
+|        <a href="./exampleExpo/src/advanced-parallax/index.tsx">advanced-parallax</a>        | <a href="./exampleExpo/src/pause-advanced-parallax/index.tsx">pause-advanced-parallax</a> | <a href="./exampleExpo/src/scale-fade-in-out/index.tsx">scale-fade-in-out</a> |
+|                      <img src="assets/rotate-scale-fade-in-out.gif"/>                       |                           <img src="assets/rotate-in-out.gif"/>                           |                     <img src="assets/anim-tab-bar.gif"/>                      |
+| <a href="./exampleExpo/src/rotate-scale-fade-in-out/index.tsx">rotate-scale-fade-in-out</a> |           <a href="./exampleExpo/src/rotate-in-out/index.tsx">rotate-in-out</a>           |      <a href="./exampleExpo/src/anim-tab-bar/index.tsx">anim-tab-bar</a>      |
+|                               <img src="assets/marquee.gif"/>                               |                             <img src="assets/multiple.gif"/>                              |                       <img src="assets/circular.gif"/>                        |
+|                  <a href="./exampleExpo/src/marquee/index.tsx">marquee</a>                  |                <a href="./exampleExpo/src/multiple/index.tsx">multiple</a>                |          <a href="./exampleExpo/src/circular/index.tsx">circular</a>          |
+|                           <img src="assets/parallax-layers.gif"/>                           |                               <img src="assets/flow.gif"/>                                |                         <img src="assets/fold.gif"/>                          |
+|          <a href="./exampleExpo/src/parallax-layers/index.tsx">parallax-layers</a>          |                    <a href="./exampleExpo/src/flow/index.tsx">flow</a>                    |              <a href="./exampleExpo/src/fold/index.tsx">fold</a>              |
 
 ## 目录
 
@@ -102,6 +69,10 @@ npm install react-native-reanimated-carousel
 ```
 
 并且我们需要安装 [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) 、[`react-native-reanimated(>=2.0.0)`](https://github.com/kmagiera/react-native-reanimated)，安装步骤可参考各自文档。
+| | react-native-reanimated | react-native-gesture-handler |
+| -------------------------------------- | ----------------------- | ---------------------------- |
+| react-native-reanimated-carousel < v3 | <2.7.0 | \* |
+| react-native-reanimated-carousel >= v3 | >=2.7.0 | \* |
 
 ## 使用
 
@@ -121,7 +92,8 @@ import Carousel from 'react-native-reanimated-carousel';
 -   优化
     -   当渲染大量元素时，可使用`windowSize`属性，来控制当前元素的两侧渲染数量，默认为全量渲染。经测试不加此属性，渲染 200 个空 view 时会出现掉帧情况，设置此属性后渲染 1000 个空 view 依旧流畅。（具体数量与测试的手机型号相关）
 -   在`ScrollView/FlastList`中使用
-    -   **[#143](https://github.com/dohooo/react-native-reanimated-carousel/issues/143) - Carousel suppresses ScrollView/FlastList scroll gesture handler:** 当轮播图被放置在ScrollView/FlatList中时，轮播图的部分将无法控制列表滚动，解决办法是我们只允许手势系统识别某一方向，而不是所有方向，在下方例子中我们为了让列表可以向下滑动，所以我们使用[activeOffsetX](https://docs.swmansion.com/react-native-gesture-handler/docs/1.10.3/api/gesture-handlers/pan-gh/#activeoffsetx)属性来控制轮播图只识别横向手势:
+
+    -   **[#143](https://github.com/dohooo/react-native-reanimated-carousel/issues/143) - Carousel suppresses ScrollView/FlastList scroll gesture handler:** 当轮播图被放置在 ScrollView/FlatList 中时，轮播图的部分将无法控制列表滚动，解决办法是我们只允许手势系统识别某一方向，而不是所有方向，在下方例子中我们为了让列表可以向下滑动，所以我们使用[activeOffsetX](https://docs.swmansion.com/react-native-gesture-handler/docs/1.10.3/api/gesture-handlers/pan-gh/#activeoffsetx)属性来控制轮播图只识别横向手势:
 
         ```tsx
         <Carousel
@@ -131,7 +103,7 @@ import Carousel from 'react-native-reanimated-carousel';
           }}
         />
         ```
-    
+
 -   RTL
     -   所有 layout 均完美支持 RTL 模式，并且无需再做任何配置。但在 RTL 模式下使用自动播放时，默认不会自动转换方向，需要结合 autoPlayReverse 来手动控制方向。
 -   EXPO
@@ -170,6 +142,12 @@ yarn android:pretty
 yarn web
 yarn web:pretty
 ```
+
+## 赞助商
+
+<p align="center">
+  <img src='https://github.com/dohooo/sponsors/blob/master/sponsors.png?raw=true'/>
+</p>
 
 ## 许可
 

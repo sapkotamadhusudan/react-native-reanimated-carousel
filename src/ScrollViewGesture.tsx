@@ -39,7 +39,6 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
     const {
         props: {
             vertical,
-            style,
             data,
             pagingEnabled,
             snapEnabled,
@@ -69,24 +68,22 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
     const _withSpring = React.useCallback(
         (toValue: number, onFinished?: () => void) => {
             'worklet';
-            const callback = (isFinished: boolean) => {
-                'worklet';
-                if (isFinished) {
-                    onFinished && runOnJS(onFinished)();
-                }
-            };
-
             const defaultWithAnimation: WithTimingAnimation = {
                 type: 'timing',
                 config: {
-                    duration: scrollAnimationDuration,
+                    duration: scrollAnimationDuration + 100,
                     easing: Easing.easeOutQuart,
                 },
             };
 
             return dealWithAnimation(withAnimation ?? defaultWithAnimation)(
                 toValue,
-                callback
+                (isFinished: boolean) => {
+                    'worklet';
+                    if (isFinished) {
+                        onFinished && runOnJS(onFinished)();
+                    }
+                }
             );
         },
         [scrollAnimationDuration, withAnimation]
@@ -274,7 +271,11 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
 
     return (
         <Animated.View
-            style={[styles.container, directionStyle, style]}
+            style={[
+                styles.container,
+                directionStyle,
+                { width: '100%', height: '100%' },
+            ]}
             onTouchStart={onTouchBegin}
             onTouchEnd={onTouchEnd}
         >
